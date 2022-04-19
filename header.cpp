@@ -3,9 +3,9 @@
 #include "string.h"
 #include "malloc.h"
 
-void clear(node_t* node)
+void clear(node_t *node)
 {
-  node_t* temp = node;
+    node_t *temp = node;
     while (temp)
     {
         node = temp;
@@ -15,10 +15,9 @@ void clear(node_t* node)
     }
     delete temp;
     temp = NULL;
-
 }
 
-node_t* tail(node_t* node)
+node_t *tail(node_t *node)
 {
     while (node->next_)
     {
@@ -27,7 +26,7 @@ node_t* tail(node_t* node)
     return node;
 }
 
-unsigned int length(node_t* node)
+unsigned int length(node_t *node)
 {
 
     while (node->next_)
@@ -37,7 +36,7 @@ unsigned int length(node_t* node)
     return node->data_.id_;
 }
 
-void push_front(node_t** node, const char* data)
+void push_front(node_t **node, const char *data)
 {
     if (!*node)
     {
@@ -48,7 +47,7 @@ void push_front(node_t** node, const char* data)
     }
     else
     {
-        node_t* head = new node_t;
+        node_t *head = new node_t;
         head->data_ = (*node)->data_;
         head->next_ = (*node)->next_;
 
@@ -58,17 +57,16 @@ void push_front(node_t** node, const char* data)
         (*node)->next_ = head;
         head = (*node);
 
-        while ((*node)) 
+        while ((*node))
         {
             (*node)->data_.id_++;
-            (*node)=(*node)->next_;
+            (*node) = (*node)->next_;
         }
         (*node) = head;
-
     }
 }
 
-void push_back(node_t** node, const char* data)
+void push_back(node_t **node, const char *data)
 {
     if (!*node)
     {
@@ -79,13 +77,13 @@ void push_back(node_t** node, const char* data)
     }
     else
     {
-        node_t* head = (*node);
+        node_t *head = (*node);
         while ((*node)->next_)
         {
             (*node) = (*node)->next_;
         }
 
-        node_t* temp = new node_t;
+        node_t *temp = new node_t;
         temp->data_.id_ = (*node)->data_.id_ + 1;
         strcpy(temp->data_.name_, data);
         temp->next_ = NULL;
@@ -95,16 +93,16 @@ void push_back(node_t** node, const char* data)
     }
 }
 
-data_t pop_front(node_t** node)
+data_t pop_front(node_t **node)
 {
     data_t res = (*node)->data_;
     (*node) = (*node)->next_;
     return res;
 }
 
-data_t pop_back(node_t** node)
+data_t pop_back(node_t **node)
 {
-    node_t* head = (*node);
+    node_t *head = (*node);
     while ((*node)->next_->next_)
     {
         (*node) = (*node)->next_;
@@ -121,17 +119,14 @@ data_t pop_back(node_t** node)
     (*node)->next_->data_.id_ = 0;
     (*node)->next_->next_ = NULL;
     (*node)->next_ = NULL;
-    
-
     (*node) = head;
-
 
     return res;
 }
 
-void insert(node_t** node, const char* data)
+void insert(node_t **node, const char *data)
 {
-    node_t* temp = new node_t;
+    node_t *temp = new node_t;
     strcpy(temp->data_.name_, data);
     temp->data_.id_ = (*node)->data_.id_ + 1;
 
@@ -139,9 +134,9 @@ void insert(node_t** node, const char* data)
     (*node)->next_ = temp;
 }
 
-void remove(node_t** node, const char* data)
+void remove(node_t **node, const char *data)
 {
-    node_t* head = (*node);
+    node_t *head = (*node);
     int flag = 0;
     for (size_t i = 0; i < strlen((*node)->next_->data_.name_); i++)
     {
@@ -156,32 +151,32 @@ void remove(node_t** node, const char* data)
     }
     if (flag)
     {
-       (*node) = (*node)->next_;
+        (*node) = (*node)->next_;
     }
-   else
-   {
+    else
+    {
         flag = 0;
-       while ((*node))
-       {
-           for (size_t i = 0; i < strlen((*node)->next_->data_.name_); i++)
-           {
-               if ((*node)->next_->data_.name_[i] == data[i])
-               {
-                   flag = 1;
-               }
-               else
-               {
-                   flag = 0;
-               }
-           }
-           if (flag)
-           {
-               node_t* tmp = (*node)->next_;
-               (*node)->next_ = tmp->next_;
-               delete tmp;
-           }
-           (*node) = (*node)->next_;
-       }
-       (*node) = head;
-   }
+        while ((*node))
+        {
+            for (size_t i = 0; i < strlen((*node)->next_->data_.name_); i++)
+            {
+                if ((*node)->next_->data_.name_[i] == data[i])
+                {
+                    flag = 1;
+                }
+                else
+                {
+                    flag = 0;
+                }
+            }
+            if (flag)
+            {
+                node_t *tmp = (*node)->next_;
+                (*node)->next_ = tmp->next_;
+                delete tmp;
+            }
+            (*node) = (*node)->next_;
+        }
+        (*node) = head;
+    }
 }

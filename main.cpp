@@ -5,8 +5,8 @@
 
 int main(int argc, char const *argv[], char *envp[])
 {
-    node_t * first = NULL;
-    const char * data [3] = {"Alpha", "Bravo", "Charlie"};
+    node_t *first = NULL;
+    const char *data[3] = {"Alpha", "Bravo", "Charlie"};
 
     for (unsigned int i = 0; i < 3; i++)
     {
@@ -15,7 +15,7 @@ int main(int argc, char const *argv[], char *envp[])
 
     assert(3 == length(first));
 
-    node_t * charlie_ref = tail(first);
+    node_t *charlie_ref = tail(first);
     assert(!strcmp(charlie_ref->data_.name_, "Charlie"));
 
     push_front(&first, "Alice");
@@ -26,14 +26,14 @@ int main(int argc, char const *argv[], char *envp[])
     assert(!strcmp(delta.name_, "Delta"));
 
     data_t alice = pop_front(&first);
-    assert( alice.name_ );
+    assert(alice.name_);
 
     insert(&first, "Bob");
     assert(!strcmp(first->next_->data_.name_, "Bob"));
 
     charlie_ref = tail(first);
     insert(&charlie_ref, "Zulu");
-    node_t * zulu_ref = tail(first);
+    node_t *zulu_ref = tail(first);
     assert(!strcmp(zulu_ref->data_.name_, "Zulu"));
 
     remove(&first, "Zulu");
